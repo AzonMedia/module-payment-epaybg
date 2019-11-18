@@ -1,8 +1,7 @@
 <?php
-
+declare(strict_types=1);
 
 namespace Azonmedia\Payments\EpayBg;
-
 
 use Azonmedia\Payments\Interfaces\CommandResultInterface;
 use Azonmedia\Payments\Interfaces\CommandTargetInterface;
@@ -27,35 +26,45 @@ class PaymentProvider implements PaymentProviderInterface
      */
     public static function get_name(): string
     {
-        // TODO: Implement get_name() method.
+        return self::PAYMENT_PROVIDER_NAME;
     }
 
     public function get_account_info(): PaymentProviderAccountInterface
     {
-        // TODO: Implement get_account_info() method.
+        return $this->PaymentProviderAccount;
     }
 
     public function authorize(float $amount, CommandTargetInterface $CommandTarget): CommandResultInterface
     {
+        if ($amount <= 0) {
+            throw new \InvalidArgumentException(sprintf('The provided amount must be a positive number.'));
+        }
+
         // TODO: Implement authorize() method.
     }
 
-    public function capture($authorization_code, CommandTargetInterface $CommandTarget): CommandResultInterface
+    public function capture(/* scalar */ $authorization_code, CommandTargetInterface $CommandTarget): CommandResultInterface
     {
         // TODO: Implement capture() method.
     }
 
     public function charge(float $amount, CommandTargetInterface $CommandTarget): CommandResultInterface
     {
+        if ($amount <= 0) {
+            throw new \InvalidArgumentException(sprintf('The provided amount must be a positive number.'));
+        }
         // TODO: Implement charge() method.
     }
 
-    public function refund(float $amount, $payment_code): CommandResultInterface
+    public function refund(float $amount, /* scalar */ $payment_code): CommandResultInterface
     {
+        if ($amount <= 0) {
+            throw new \InvalidArgumentException(sprintf('The provided amount must be a positive number.'));
+        }
         // TODO: Implement refund() method.
     }
 
-    public function void($payment_code): CommandResultInterface
+    public function void(/* scalar */ $payment_code): CommandResultInterface
     {
         // TODO: Implement void() method.
     }

@@ -1,8 +1,7 @@
 <?php
-
+declare(strict_types=1);
 
 namespace Azonmedia\Payments\EpayBg;
-
 
 use Azonmedia\Payments\Interfaces\CommandResultInterface;
 use Azonmedia\Payments\Interfaces\CreditCardInterface;
